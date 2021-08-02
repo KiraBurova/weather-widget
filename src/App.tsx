@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
+import { getWeatherIconByIconName, getWeatherReportByLocation } from './api';
+
 import MainWidget from './components/Widget';
 
 import { WeatherReportType, WidgetDataType } from './types';
@@ -27,7 +29,7 @@ const App = () => {
       countryName: weatherData.sys.country,
       weatherDescription: weatherData.weather[0].description,
       feelsLike: weatherData.main.feels_like,
-      weatherIcon: `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`,
+      weatherIcon: getWeatherIconByIconName(weatherData.weather[0].icon),
       temperature: weatherData.main.temp,
       wind: weatherData.wind,
       humidity: weatherData.main.humidity,
@@ -41,7 +43,7 @@ const App = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
 
-      fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
+      getWeatherReportByLocation(latitude, longitude)
         .then((response) => response.json())
         .then((weatherData: WeatherReportType) => {
           const weatherReport: WidgetDataType = handleTransformLocationData(weatherData);
