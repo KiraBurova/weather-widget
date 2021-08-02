@@ -19,6 +19,8 @@ const App = () => {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
 
+        console.log(position);
+
         getWeatherReportByLocation(latitude, longitude)
           .then((response) => response.json())
           .then((weatherData: WeatherReportType) => {
@@ -67,7 +69,7 @@ const App = () => {
         {settingsOpened ? (
           <Settings handleOpenSettings={handleOpenSettings} />
         ) : (
-          !!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget weatherReport={weatherReport} handleOpenSettings={handleOpenSettings} />)
+          !!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget key={weatherReport.cityName} weatherReport={weatherReport} handleOpenSettings={handleOpenSettings} />)
         )}
         <span className={styles.error}>{error}</span>
       </div>

@@ -1,0 +1,36 @@
+@import '../../styles/variables';
+
+.addContainer {
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+}
+
+.addButton {
+  font-size: 1rem;
+  padding: 0.5em 1.2em;
+  background-color: $accent;
+  color: $main-light;
+  font-weight: bold;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+
+  &:hover {
+    background-color: darken($accent, 10%);
+  }
+
+  &:disabled {
+    background-color: $disabled;
+    cursor: initial;
+  }
+}
+
+.locationInput {
+  flex: 1;
+  font-size: 1rem;
+  padding: 0.5em;
+  border-radius: $border-radius;
+  border: 1px solid $main-dark;
+}

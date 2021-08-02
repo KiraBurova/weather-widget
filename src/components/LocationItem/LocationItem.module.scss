@@ -1,0 +1,15 @@
+@import '../../styles/variables';
+
+.item {
+  display: flex;
+  align-items: center;
+  background-color: $main-dark;
+  border-radius: $border-radius;
+  font-size: 1rem;
+  padding: 0.5em;
+}
+
+.dragIcon {
+  font-size: 24px;
+  cursor: pointer;
+}
