@@ -19,18 +19,32 @@ export function createStore() {
     fetchWeatherReportByCityName(location: TLocation) {
       getWeatherReportByCityName(location.name)
         .then((response) => {
-          this.setLocations(location);
+          this.addLocation(location);
           this.setLocationsToLocalStorage();
           const weatherReports = transgormWeatherReportData(response.data);
           this.setWeatherReports(weatherReports);
         })
         .catch((error: Error) => console.log(error));
     },
-    setLocations(location: TLocation) {
+    addLocation(location: TLocation) {
       this.locations.push(location);
+    },
+    setLocations(locations: TLocation[]) {
+      this.locations = locations;
     },
     deleteLocation(id: number) {
       this.locations = this.locations.filter((location) => location.id !== id);
+    },
+    //@ts-ignore
+    reorderLocations(list, startIndex, endIndex) {
+      const result = Array.from(list);
+      const [removed] = result.splice(startIndex, 1);
+      result.splice(endIndex, 0, removed);
+
+      console.log(list, startIndex);
+
+      //@ts-ignore
+      this.setLocations(result);
     },
     setWeatherReports(weatherReport: WidgetDataType) {
       this.weatherReports.push(weatherReport);

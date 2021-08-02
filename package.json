@@ -18,6 +18,7 @@
     "@iconify/react": "^1.1.4",
     "@types/node": "^12.20.18",
     "@types/react": "^17.0.15",
+    "@types/react-beautiful-dnd": "^13.1.1",
     "@types/react-dom": "^17.0.9"
   },
   "scripts": {
