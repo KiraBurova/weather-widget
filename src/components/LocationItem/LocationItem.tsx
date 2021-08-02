@@ -11,7 +11,7 @@ import DeleteIcon from '@iconify/icons-ic/outline-delete-outline';
 import styles from './LocationItem.module.scss';
 import { LocationItemProps } from './types';
 
-const LocationItem = observer(({ location }: LocationItemProps) => {
+const LocationItem = observer(({ location, dragHandleProps }: LocationItemProps) => {
   const store = useDataStore();
   const { deleteLocation } = store;
 
@@ -21,7 +21,9 @@ const LocationItem = observer(({ location }: LocationItemProps) => {
 
   return (
     <div className={styles.item}>
-      <Icon icon={DragIcon} className={styles.dragIcon} />
+      <div {...dragHandleProps}>
+        <Icon icon={DragIcon} className={styles.dragIcon} />
+      </div>
       {location.name}
       <span className={styles.deleteIcon} onClick={handleDeleteLocation(location.id)}>
         <Icon icon={DeleteIcon} />

@@ -5,7 +5,7 @@ import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautif
 
 import { Icon } from '@iconify/react';
 import CloseSettingsIcon from '@iconify/icons-ic/close';
-
+import DragIcon from '@iconify/icons-ic/outline-drag-handle';
 import { useDataStore } from '../../store/context';
 
 import LocationItem from '../LocationItem';
@@ -36,13 +36,13 @@ const Settings = observer(({ handleToggleSettings }: SettingsProps) => {
       </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId='droppable'>
-          {(provided, snapshot) => (
+          {(provided) => (
             <div className={styles.addedLocations} {...provided.droppableProps} ref={provided.innerRef}>
               {locations.map((location, index) => (
                 <Draggable key={location.id} draggableId={'' + location.id} index={index}>
-                  {(provided, snapshot) => (
-                    <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{ ...provided.draggableProps.style, marginTop: '5px' }}>
-                      <LocationItem key={location.id} location={location} />
+                  {(provided) => (
+                    <div ref={provided.innerRef} {...provided.draggableProps} style={{ ...provided.draggableProps.style, marginBottom: '5px' }}>
+                      <LocationItem dragHandleProps={provided.dragHandleProps} location={location}></LocationItem>
                     </div>
                   )}
                 </Draggable>
