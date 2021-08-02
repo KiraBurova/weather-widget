@@ -51,6 +51,7 @@ const Settings = observer(({ handleToggleSettings }: SettingsProps) => {
           )}
         </Droppable>
       </DragDropContext>
+      {!locations.length && <div className={styles.emptyPlaceholder}>No settings yet.</div>}
       <AddLocation />
     </div>
   );
