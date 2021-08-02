@@ -21,25 +21,30 @@ const App = () => {
     handleCheckIfGeoLocationIsAvailable();
   }, []);
 
+  const handleTransformLocationData = (weatherData: WeatherReportType) => {
+    return {
+      cityName: weatherData.name,
+      countryName: weatherData.sys.country,
+      weatherDescription: weatherData.weather[0].description,
+      feelsLike: weatherData.main.feels_like,
+      weatherIcon: `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`,
+      temperature: weatherData.main.temp,
+      wind: weatherData.wind,
+      humidity: weatherData.main.humidity,
+      visibility: weatherData.visibility,
+      pressure: weatherData.main.pressure,
+      clouds: weatherData.clouds.all,
+    };
+  };
+
   const handleGetCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
+
       fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${process.env.REACT_APP_API_KEY}&units=metric`)
         .then((response) => response.json())
         .then((weatherData: WeatherReportType) => {
-          const weatherReport: WidgetDataType = {
-            cityName: weatherData.name,
-            countryName: weatherData.sys.country,
-            weatherDescription: weatherData.weather[0].description,
-            feelsLike: weatherData.main.feels_like,
-            weatherIcon: `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`,
-            temperature: weatherData.main.temp,
-            wind: weatherData.wind,
-            humidity: weatherData.main.humidity,
-            visibility: weatherData.visibility,
-            pressure: weatherData.main.pressure,
-            clouds: weatherData.clouds.all,
-          };
+          const weatherReport: WidgetDataType = handleTransformLocationData(weatherData);
           console.log(weatherData);
           setWeatherReports([...weatherReports, weatherReport]);
         })
