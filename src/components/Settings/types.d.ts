@@ -1,5 +1,5 @@
 import React from 'react';
 
 export interface SettingsProps {
-  handleOpenSettings: (e: React.MouseEvent) => void;
+  handleToggleSettings: (e: React.MouseEvent) => void;
 }

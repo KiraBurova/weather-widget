@@ -10,14 +10,14 @@ import WindIcon from '@iconify/icons-ic/outline-near-me';
 import { WidgetProps } from './types';
 import styles from './Widget.module.scss';
 
-const Widget = ({ weatherReport, handleOpenSettings }: WidgetProps) => {
+const Widget = ({ weatherReport, handleToggleSettings }: WidgetProps) => {
   return (
     <div>
       <div className={styles.widgetTop}>
         <span className={styles.place}>
           {weatherReport.cityName}, {weatherReport.countryName}
         </span>
-        <div onClick={handleOpenSettings}>
+        <div onClick={handleToggleSettings}>
           <Icon icon={SettingsIcon} className={styles.settingsIcon} />
         </div>
       </div>

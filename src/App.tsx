@@ -1,18 +1,25 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
+import { AxiosResponse } from 'axios';
+
 import { getWeatherIconByIconName, getWeatherReportByLocation } from './api';
+
+import { DataStoreProvider } from './store/context';
 
 import MainWidget from './components/Widget';
 import Settings from './components/Settings';
 
 import { WeatherReportType, WidgetDataType } from './types';
-
 import styles from './App.module.scss';
 
 const App = () => {
   const [error, setError] = useState('');
   const [settingsOpened, setSettingsOpened] = useState(false);
   const [weatherReports, setWeatherReports] = useState<Array<WidgetDataType>>([]);
+
+  const handleToggleSettings = useCallback(() => {
+    setSettingsOpened(!settingsOpened);
+  }, [settingsOpened]);
 
   useEffect(() => {
     const handleGetCurrentLocation = () => {
@@ -22,13 +29,12 @@ const App = () => {
         console.log(position);
 
         getWeatherReportByLocation(latitude, longitude)
-          .then((response) => response.json())
-          .then((weatherData: WeatherReportType) => {
-            const weatherReport: WidgetDataType = handleTransformLocationData(weatherData);
-            console.log(weatherData);
+          .then((data) => {
+            //:todo add type for data
+            const weatherReport: WidgetDataType = handleTransformLocationData(data.data);
             setWeatherReports((reports) => [...reports, weatherReport]);
           })
-          .catch((error: TypeError) => setError(error.message));
+          .catch((error: Error) => setError(error.message));
       });
     };
 
@@ -59,21 +65,19 @@ const App = () => {
     };
   };
 
-  const handleOpenSettings = useCallback(() => {
-    setSettingsOpened(!settingsOpened);
-  }, [settingsOpened]);
-
   return (
-    <div className={styles.app}>
-      <div className={styles.container}>
-        {settingsOpened ? (
-          <Settings handleOpenSettings={handleOpenSettings} />
-        ) : (
-          !!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget key={weatherReport.cityName} weatherReport={weatherReport} handleOpenSettings={handleOpenSettings} />)
-        )}
-        <span className={styles.error}>{error}</span>
+    <DataStoreProvider>
+      <div className={styles.app}>
+        <div className={styles.container}>
+          {settingsOpened ? (
+            <Settings handleToggleSettings={handleToggleSettings} />
+          ) : (
+            !!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget key={weatherReport.cityName} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />)
+          )}
+          <span className={styles.error}>{error}</span>
+        </div>
       </div>
-    </div>
+    </DataStoreProvider>
   );
 };
 

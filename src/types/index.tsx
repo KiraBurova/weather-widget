@@ -59,3 +59,8 @@ export type WidgetDataType = {
   pressure: number;
   clouds: number;
 };
+
+export type TLocation = {
+  name: string;
+  id: number;
+};
