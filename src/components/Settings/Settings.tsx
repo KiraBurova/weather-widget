@@ -24,13 +24,7 @@ const Settings = observer(({ handleToggleSettings }: SettingsProps) => {
           <Icon icon={CloseSettingsIcon} className={styles.settingsIcon} />
         </div>
       </div>
-      {!!locations.length && (
-        <div className={styles.addedLocations}>
-          {locations.map((location) => (
-            <LocationItem key={location.id} location={location} />
-          ))}
-        </div>
-      )}
+      <div className={styles.addedLocations}>{!!locations.length && locations.map((location) => <LocationItem key={location.id} location={location} />)}</div>
       <AddLocation />
     </div>
   );

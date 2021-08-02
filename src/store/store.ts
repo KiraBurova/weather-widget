@@ -17,6 +17,9 @@ export function createStore() {
     setLocations(location: TLocation) {
       this.locations.push(location);
     },
+    deleteLocation(id: number) {
+      this.locations = this.locations.filter((location) => location.id !== id);
+    },
   };
 }
 export type TStore = ReturnType<typeof createStore>;

@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 
-import { AxiosResponse } from 'axios';
-
 import { getWeatherIconByIconName, getWeatherReportByLocation } from './api';
 
 import { DataStoreProvider } from './store/context';
