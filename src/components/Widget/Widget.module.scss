@@ -1,7 +1,13 @@
 @import '../../styles/variables';
 
 .widget {
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid $main-dark;
+  height: 300px;
+  padding: 1.5em;
+
+  &:last-of-type {
+    border-bottom: none;
+  }
 }
 
 .widgetTop {
