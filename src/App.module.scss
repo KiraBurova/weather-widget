@@ -1,7 +1,7 @@
 @import 'styles/variables';
 
 .container {
-  width: 300px;
+  min-width: 300px;
   height: 350px;
   padding: 1.5em;
   border: 1px solid $main-dark;
