@@ -1,27 +1,28 @@
-import { getWeatherReportByCityName, getWeatherReportByLocation, getWeatherIconByIconName } from '../api';
+import { getWeatherReportByCityName, getWeatherReportByLocation } from '../api';
+import { transgormWeatherReportData } from '../utils';
 
-import { TLocation, WeatherReportType } from '../types';
+import { TLocation, WidgetDataType } from '../types';
 
 export function createStore() {
   return {
     location: '',
     locations: [] as TLocation[],
-    weatherReports: [] as WeatherReportType[],
+    weatherReports: [] as WidgetDataType[],
     fetchWeatherReportByLocation(latitude: number, longitude: number) {
       getWeatherReportByLocation(latitude, longitude)
-        .then((weatherData: any) => {
-          console.log(weatherData);
-          const w = this.transformLocationData(weatherData.data);
-          this.setWeatherReports(w);
+        .then((response) => {
+          const weatherReports = transgormWeatherReportData(response.data);
+          this.setWeatherReports(weatherReports);
         })
         .catch((error: Error) => console.log(error));
     },
     fetchWeatherReportByCityName(location: TLocation) {
       getWeatherReportByCityName(location.name)
-        .then((weatherData) => {
+        .then((response) => {
           this.setLocations(location);
-          const w = this.transformLocationData(weatherData.data);
-          this.setWeatherReports(w);
+          this.setLocationsToLocalStorage();
+          const weatherReports = transgormWeatherReportData(response.data);
+          this.setWeatherReports(weatherReports);
         })
         .catch((error: Error) => console.log(error));
     },
@@ -31,23 +32,18 @@ export function createStore() {
     deleteLocation(id: number) {
       this.locations = this.locations.filter((location) => location.id !== id);
     },
-    setWeatherReports(weatherReport: any) {
+    setWeatherReports(weatherReport: WidgetDataType) {
       this.weatherReports.push(weatherReport);
     },
-    transformLocationData(weatherData: WeatherReportType) {
-      return {
-        cityName: weatherData.name,
-        countryName: weatherData.sys.country,
-        weatherDescription: weatherData.weather[0].description,
-        feelsLike: weatherData.main.feels_like,
-        weatherIcon: getWeatherIconByIconName(weatherData.weather[0].icon),
-        temperature: weatherData.main.temp,
-        wind: weatherData.wind,
-        humidity: weatherData.main.humidity,
-        visibility: weatherData.visibility,
-        pressure: weatherData.main.pressure,
-        clouds: weatherData.clouds.all,
-      };
+    setLocationsToLocalStorage() {
+      const serializedLocations = JSON.stringify(this.locations);
+
+      localStorage.setItem('locations', serializedLocations);
+    },
+    getLocationFromLocalStorage(): TLocation[] {
+      const storedLocations = localStorage.getItem('locations') || '{}';
+
+      return JSON.parse(storedLocations);
     },
   };
 }

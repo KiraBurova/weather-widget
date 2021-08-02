@@ -7,10 +7,11 @@ import MainWidget from './components/Widget';
 import Settings from './components/Settings';
 
 import styles from './App.module.scss';
+import { TLocation } from './types';
 
 const App = observer(() => {
   const store = useDataStore();
-  const { weatherReports, fetchWeatherReportByLocation } = store;
+  const { weatherReports, getLocationFromLocalStorage, fetchWeatherReportByLocation, fetchWeatherReportByCityName } = store;
   const [error, setError] = useState('');
   const [settingsOpened, setSettingsOpened] = useState(false);
 
@@ -23,7 +24,15 @@ const App = observer(() => {
       navigator.geolocation.getCurrentPosition((position) => {
         const { latitude, longitude } = position.coords;
 
-        fetchWeatherReportByLocation(latitude, longitude);
+        const parsedLocations = getLocationFromLocalStorage();
+
+        if (Object.values(parsedLocations).length) {
+          Object.values(parsedLocations as TLocation[]).forEach((location) => {
+            fetchWeatherReportByCityName(location);
+          });
+        } else {
+          fetchWeatherReportByLocation(latitude, longitude);
+        }
       });
     };
 
@@ -35,8 +44,10 @@ const App = observer(() => {
       }
     };
 
+    console.log('called');
+
     handleCheckIfGeoLocationIsAvailable();
-  }, []);
+  }, [fetchWeatherReportByLocation, fetchWeatherReportByCityName, getLocationFromLocalStorage]);
 
   return (
     <div className={styles.app}>
