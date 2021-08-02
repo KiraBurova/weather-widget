@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import { getWeatherIconByIconName, getWeatherReportByLocation } from './api';
 
 import MainWidget from './components/Widget';
+import Settings from './components/Settings';
 
 import { WeatherReportType, WidgetDataType } from './types';
 
@@ -10,6 +11,7 @@ import styles from './App.module.scss';
 
 const App = () => {
   const [error, setError] = useState('');
+  const [settingsOpened, setSettingsOpened] = useState(false);
   const [weatherReports, setWeatherReports] = useState<Array<WidgetDataType>>([]);
 
   useEffect(() => {
@@ -55,10 +57,20 @@ const App = () => {
     };
   };
 
+  const handleOpenSettings = useCallback(() => {
+    setSettingsOpened(!settingsOpened);
+  }, [settingsOpened]);
+
   return (
     <div className={styles.app}>
-      {!!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget weatherReport={weatherReport} />)}
-      <span className={styles.error}>{error}</span>
+      <div className={styles.container}>
+        {settingsOpened ? (
+          <Settings handleOpenSettings={handleOpenSettings} />
+        ) : (
+          !!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget weatherReport={weatherReport} handleOpenSettings={handleOpenSettings} />)
+        )}
+        <span className={styles.error}>{error}</span>
+      </div>
     </div>
   );
 };

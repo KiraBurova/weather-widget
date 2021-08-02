@@ -1,15 +1,5 @@
 @import '../../styles/variables';
 
-.widget {
-  width: 300px;
-  min-height: 300px;
-  padding: 1.5em;
-  border: 1px solid $main-dark;
-  border-radius: $border-radius;
-  font-size: 1rem;
-  box-sizing: border-box;
-}
-
 .widgetTop {
   display: flex;
   justify-content: space-between;
