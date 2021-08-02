@@ -54,7 +54,12 @@ const App = () => {
     });
   };
 
-  return <div className={styles.app}>{!!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget weatherReport={weatherReport} />)}</div>;
+  return (
+    <div className={styles.app}>
+      {!!weatherReports.length && weatherReports.map((weatherReport) => <MainWidget weatherReport={weatherReport} />)}
+      <span className={styles.error}>{error}</span>
+    </div>
+  );
 };
 
 export default App;
