@@ -1,7 +1,7 @@
 export type WeatherReportType = {
   base: string;
   clouds: {
-    all: string;
+    all: number;
   };
   cod: number;
   coord: {
@@ -47,6 +47,7 @@ export type WidgetDataType = {
   cityName: string;
   countryName: string;
   weatherDescription: string;
+  feelsLike: number;
   weatherIcon: string;
   temperature: number;
   wind: {
@@ -55,5 +56,6 @@ export type WidgetDataType = {
   };
   humidity: number;
   visibility: number;
-  preassure: number;
+  pressure: number;
+  clouds: number;
 };

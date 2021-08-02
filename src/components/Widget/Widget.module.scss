@@ -1,12 +1,24 @@
 @import '../../styles/variables';
 
 .widget {
-  width: 250px;
-  height: 300px;
-  padding: 0.625em;
+  width: 300px;
+  min-height: 300px;
+  padding: 1.5em;
   border: 1px solid $main-dark;
   border-radius: $border-radius;
   font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.widgetTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.settingsIcon {
+  font-size: 24px;
+  cursor: pointer;
 }
 
 .place {
@@ -14,6 +26,44 @@
 }
 
 .temperature {
-  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8em;
+  font-weight: bold;
+}
+
+.weatherDescription {
+  display: inline-block;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.wind {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
+.pressure {
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.boldText {
   font-weight: bold;
 }
