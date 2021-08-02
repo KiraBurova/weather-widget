@@ -1,0 +1,19 @@
+@import '../../styles/variables';
+
+.widget {
+  width: 250px;
+  height: 300px;
+  padding: 0.625em;
+  border: 1px solid $main-dark;
+  border-radius: $border-radius;
+  font-size: 1rem;
+}
+
+.place {
+  font-weight: bold;
+}
+
+.temperature {
+  font-size: 1.5em;
+  font-weight: bold;
+}
