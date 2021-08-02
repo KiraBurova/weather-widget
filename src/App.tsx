@@ -13,6 +13,21 @@ const App = () => {
   const [weatherReports, setWeatherReports] = useState<Array<WidgetDataType>>([]);
 
   useEffect(() => {
+    const handleGetCurrentLocation = () => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        const { latitude, longitude } = position.coords;
+
+        getWeatherReportByLocation(latitude, longitude)
+          .then((response) => response.json())
+          .then((weatherData: WeatherReportType) => {
+            const weatherReport: WidgetDataType = handleTransformLocationData(weatherData);
+            console.log(weatherData);
+            setWeatherReports((reports) => [...reports, weatherReport]);
+          })
+          .catch((error: TypeError) => setError(error.message));
+      });
+    };
+
     const handleCheckIfGeoLocationIsAvailable = () => {
       if ('geolocation' in navigator) {
         handleGetCurrentLocation();
@@ -20,6 +35,7 @@ const App = () => {
         setError('Geolocation is not available');
       }
     };
+
     handleCheckIfGeoLocationIsAvailable();
   }, []);
 
@@ -37,21 +53,6 @@ const App = () => {
       pressure: weatherData.main.pressure,
       clouds: weatherData.clouds.all,
     };
-  };
-
-  const handleGetCurrentLocation = () => {
-    navigator.geolocation.getCurrentPosition((position) => {
-      const { latitude, longitude } = position.coords;
-
-      getWeatherReportByLocation(latitude, longitude)
-        .then((response) => response.json())
-        .then((weatherData: WeatherReportType) => {
-          const weatherReport: WidgetDataType = handleTransformLocationData(weatherData);
-          console.log(weatherData);
-          setWeatherReports([...weatherReports, weatherReport]);
-        })
-        .catch((error: TypeError) => setError(error.message));
-    });
   };
 
   return (
