@@ -58,6 +58,8 @@ export type WidgetDataType = {
   visibility: number;
   pressure: number;
   clouds: number;
+  // lon: number;
+  // lat: number;
 };
 
 export type TLocation = {
