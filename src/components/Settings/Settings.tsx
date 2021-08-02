@@ -5,7 +5,6 @@ import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautif
 
 import { Icon } from '@iconify/react';
 import CloseSettingsIcon from '@iconify/icons-ic/close';
-import DragIcon from '@iconify/icons-ic/outline-drag-handle';
 import { useDataStore } from '../../store/context';
 
 import LocationItem from '../LocationItem';
