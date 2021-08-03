@@ -6,7 +6,7 @@ export const getWeatherReportByLocation = (latitude: number, longitude: number) 
 };
 
 export const getWeatherIconByIconName = (icon: string) => {
-  return `https://openweathermap.org/img/wn/${icon}.png`;
+  return `https://openweathermap.org/img/wn/${icon}@2x.png`;
 };
 
 export const getWeatherReportByCityName = (cityName: string) => {

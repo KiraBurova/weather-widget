@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> show error when geolocation is not given 1`] = `
+<div
+  class="app"
+>
+  <div
+    class="container"
+  >
+    <span
+      class="error"
+      data-testid="error"
+    >
+      GeoLocation Error
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<App /> show error when no geolocation is available 1`] = `
+<div
+  class="app"
+>
+  <div
+    class="container"
+  >
+    <span
+      class="error"
+      data-testid="error"
+    >
+      Geolocation is not available
+    </span>
+  </div>
+</div>
+`;
+
+exports[`<App /> show settings 1`] = `
+<div
+  class="app"
+>
+  <div
+    class="container"
+  >
+    <div
+      class="settings"
+    >
+      <div
+        class="settingsTop"
+      >
+        <span>
+          Settings
+        </span>
+        <div>
+          <svg
+            class="closeIcon"
+            focusable="false"
+            height="1em"
+            preserveAspectRatio="xMidYMid meet"
+            style="transform: rotate(360deg);"
+            viewBox="0 0 24 24"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="addedLocations"
+        data-rbd-droppable-context-id="0"
+        data-rbd-droppable-id="droppable"
+      >
+        <div
+          data-rbd-draggable-context-id="0"
+          data-rbd-draggable-id="0.3393428674592154"
+          style="margin-bottom: 5px;"
+        >
+          <div
+            class="item"
+          >
+            <div
+              aria-describedby="rbd-hidden-text-0-hidden-text-0"
+              data-rbd-drag-handle-context-id="0"
+              data-rbd-drag-handle-draggable-id="0.3393428674592154"
+              draggable="false"
+              role="button"
+              tabindex="0"
+            >
+              <svg
+                class="dragIcon"
+                focusable="false"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                style="transform: rotate(360deg);"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20 9H4v2h16V9zM4 15h16v-2H4v2z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+            Kamenskiy
+            <span
+              class="deleteIcon"
+              role="button"
+            >
+              <svg
+                focusable="false"
+                height="1em"
+                preserveAspectRatio="xMidYMid meet"
+                style="transform: rotate(360deg);"
+                viewBox="0 0 24 24"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span
+          class="formLabel"
+        >
+          Add location:
+        </span>
+        <form
+          class="form"
+          data-testid="form"
+        >
+          <input
+            class="locationInput"
+            value=""
+          />
+          <button
+            class="addButton"
+            disabled=""
+            type="submit"
+          >
+            <svg
+              focusable="false"
+              height="1em"
+              preserveAspectRatio="xMidYMid meet"
+              style="transform: rotate(360deg);"
+              viewBox="0 0 24 24"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11 9l1.42 1.42L8.83 14H18V4h2v12H8.83l3.59 3.58L11 21l-6-6l6-6z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+    
+  </div>
+</div>
+`;

@@ -17,11 +17,14 @@
   },
   "devDependencies": {
     "@iconify/react": "^1.1.4",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
     "@types/node": "^12.20.18",
     "@types/react": "^17.0.15",
     "@types/react-beautiful-dnd": "^13.1.1",
     "@types/react-dom": "^17.0.9",
-    "gh-pages": "^3.2.3"
+    "gh-pages": "^3.2.3",
+    "react-beautiful-dnd-test-utils": "^3.2.1"
   },
   "scripts": {
     "start": "craco start",
@@ -58,14 +61,15 @@
       "!<rootDir>/src/types/index.ts",
       "!<rootDir>/src/store/store.ts",
       "!<rootDir>/src/store/context.tsx",
-      "!<rootDir>/src/utils/index.ts"
+      "!<rootDir>/src/utils/index.ts",
+      "!<rootDir>/src/index.tsx"
     ],
     "coverageThreshold": {
       "global": {
-        "branches": 90,
-        "functions": 90,
-        "lines": 90,
-        "statements": 90
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
       }
     },
     "coverageReporters": [

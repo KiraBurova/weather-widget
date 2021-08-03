@@ -32,7 +32,7 @@ const AddLocation = observer(() => {
   return (
     <div>
       <span className={styles.formLabel}>Add location:</span>
-      <form className={styles.form} onSubmit={handleSubmitLocation}>
+      <form className={styles.form} onSubmit={handleSubmitLocation} data-testid='form'>
         <input autoFocus className={styles.locationInput} value={inputtedLocation} onChange={handleChangeLocation} />
         <button type='submit' className={styles.addButton} disabled={!inputtedLocation}>
           <Icon icon={AddIcon} />

@@ -26,7 +26,6 @@ const App = observer(() => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-
           const parsedLocations = getLocationFromLocalStorage();
 
           if (Object.values(parsedLocations).length) {
@@ -66,14 +65,18 @@ const App = observer(() => {
                     <MainWidget key={weatherReport.name} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />
                   ))}
                 </div>
-                <div onClick={handleToggleSettings}>
+                <div onClick={handleToggleSettings} role='button'>
                   <Icon icon={SettingsIcon} className={styles.settingsIcon} />
                 </div>
               </div>
             )}
           </>
         )}
-        {error && <span className={styles.error}>{error}</span>}
+        {error && (
+          <span className={styles.error} data-testid='error'>
+            {error}
+          </span>
+        )}
         {loading && <span>Loading...</span>}
       </div>
     </div>

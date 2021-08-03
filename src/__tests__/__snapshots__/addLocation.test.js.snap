@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddLocation /> change location on input 1`] = `
+<div>
+  <span
+    class="formLabel"
+  >
+    Add location:
+  </span>
+  <form
+    class="form"
+    data-testid="form"
+  >
+    <input
+      class="locationInput"
+      value="Oslo"
+    />
+    <button
+      class="addButton"
+      type="submit"
+    >
+      <svg
+        focusable="false"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        style="transform: rotate(360deg);"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11 9l1.42 1.42L8.83 14H18V4h2v12H8.83l3.59 3.58L11 21l-6-6l6-6z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </form>
+</div>
+`;
+
+exports[`<AddLocation /> submit inputted location 1`] = `
+<div>
+  <span
+    class="formLabel"
+  >
+    Add location:
+  </span>
+  <form
+    class="form"
+    data-testid="form"
+  >
+    <input
+      class="locationInput"
+      value=""
+    />
+    <button
+      class="addButton"
+      disabled=""
+      type="submit"
+    >
+      <svg
+        focusable="false"
+        height="1em"
+        preserveAspectRatio="xMidYMid meet"
+        style="transform: rotate(360deg);"
+        viewBox="0 0 24 24"
+        width="1em"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11 9l1.42 1.42L8.83 14H18V4h2v12H8.83l3.59 3.58L11 21l-6-6l6-6z"
+          fill="currentColor"
+        />
+      </svg>
+    </button>
+  </form>
+</div>
+`;

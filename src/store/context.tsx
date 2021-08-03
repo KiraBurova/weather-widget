@@ -1,4 +1,4 @@
-import { useLocalStore } from 'mobx-react-lite';
+import { useLocalObservable } from 'mobx-react-lite';
 import React from 'react';
 
 import { createStore, TStore } from './store';
@@ -10,8 +10,8 @@ type StoreProviderProps = {
 };
 
 export const StoreProvider = ({ children }: StoreProviderProps) => {
-  const store = useLocalStore(createStore);
-  return <StoreContext.Provider value={store}>{children}. </StoreContext.Provider>;
+  const store = useLocalObservable(createStore);
+  return <StoreContext.Provider value={store}>{children}</StoreContext.Provider>;
 };
 
 export const useStore = () => {

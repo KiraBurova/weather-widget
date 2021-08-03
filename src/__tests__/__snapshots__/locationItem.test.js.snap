@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LocationItem /> renders the <LocationItem /> width given data 1`] = `
+<div
+  class="item"
+>
+  <div>
+    <svg
+      class="dragIcon"
+      focusable="false"
+      height="1em"
+      preserveAspectRatio="xMidYMid meet"
+      style="transform: rotate(360deg);"
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M20 9H4v2h16V9zM4 15h16v-2H4v2z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+  Oslo
+  <span
+    class="deleteIcon"
+    role="button"
+  >
+    <svg
+      focusable="false"
+      height="1em"
+      preserveAspectRatio="xMidYMid meet"
+      style="transform: rotate(360deg);"
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z"
+        fill="currentColor"
+      />
+    </svg>
+  </span>
+</div>
+`;
