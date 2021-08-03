@@ -3,6 +3,7 @@ import { Icon } from '@iconify/react';
 import PressureIcon from '@iconify/icons-ic/filter-tilt-shift';
 import WindIcon from '@iconify/icons-ic/outline-near-me';
 
+import { getWeatherIconByIconName } from '../../api';
 import { transformMetersToKM, roundDegrees } from '../../utils';
 
 import { WidgetProps } from './types';
@@ -12,17 +13,19 @@ const Widget = ({ weatherReport }: WidgetProps) => {
   return (
     <div className={styles.widget}>
       <div className={styles.widgetTop}>
-        <span className={styles.place}>
+        <span className={styles.place} data-testid='place'>
           {weatherReport.name}, {weatherReport.countryName}
         </span>
       </div>
       <div className={styles.temperature}>
-        <img src={weatherReport.weatherIcon} alt='Weather icon' />
+        {weatherReport.weather.map((w) => (
+          <img src={getWeatherIconByIconName(w.icon)} key={w.id} alt='Weather icon' />
+        ))}
         <span>{roundDegrees(weatherReport.temperature)}&deg;C</span>
       </div>
       <p className={styles.weatherDescriptionContainer}>
         <span>Feels like {roundDegrees(weatherReport.feelsLike)}&deg;C.</span>
-        <span className={styles.weatherDescription}>{weatherReport.weatherDescription}.</span>
+        <span className={styles.weatherDescription}>{weatherReport.weather.map((w) => w.description)}.</span>
       </p>
       <div className={styles.row}>
         <span className={styles.wind}>

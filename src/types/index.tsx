@@ -1,4 +1,4 @@
-export type TInitialWeatherReport = {
+export interface TInitialWeatherReport {
   base: string;
   clouds: {
     all: number;
@@ -41,24 +41,18 @@ export type TInitialWeatherReport = {
     deg: number;
     speed: number;
   };
-};
+}
 
-export type TWidgetData = {
-  name: string;
+export type TInitialWeatherReportPicked = Pick<TInitialWeatherReport, 'name' | 'weather' | 'wind' | 'visibility'>;
+
+export interface TWidgetData extends TInitialWeatherReportPicked {
   countryName: string;
-  weatherDescription: string;
   feelsLike: number;
-  weatherIcon: string;
   temperature: number;
-  wind: {
-    deg: number;
-    speed: number;
-  };
   humidity: number;
-  visibility: number;
   pressure: number;
   clouds: number;
-};
+}
 
 export type TLocation = {
   name: string;
