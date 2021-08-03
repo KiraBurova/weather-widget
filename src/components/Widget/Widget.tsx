@@ -13,7 +13,7 @@ const Widget = ({ weatherReport }: WidgetProps) => {
     <div className={styles.widget}>
       <div className={styles.widgetTop}>
         <span className={styles.place}>
-          {weatherReport.cityName}, {weatherReport.countryName}
+          {weatherReport.name}, {weatherReport.countryName}
         </span>
       </div>
       <div className={styles.temperature}>

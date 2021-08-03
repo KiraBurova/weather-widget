@@ -25,10 +25,10 @@
     color: lighten($main-dark, 20%);
   }
 
-  // &:disabled {
-  //   background-color: $disabled;
-  //   cursor: initial;
-  // }
+  &:disabled {
+    color: $disabled;
+    cursor: initial;
+  }
 }
 
 .locationInput {

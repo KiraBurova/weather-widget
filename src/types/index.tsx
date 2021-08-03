@@ -1,4 +1,4 @@
-export type WeatherReportType = {
+export type TInitialWeatherReport = {
   base: string;
   clouds: {
     all: number;
@@ -43,8 +43,8 @@ export type WeatherReportType = {
   };
 };
 
-export type WidgetDataType = {
-  cityName: string;
+export type TWidgetData = {
+  name: string;
   countryName: string;
   weatherDescription: string;
   feelsLike: number;

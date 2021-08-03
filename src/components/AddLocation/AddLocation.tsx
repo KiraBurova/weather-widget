@@ -4,11 +4,11 @@ import { observer } from 'mobx-react-lite';
 import { TLocation } from '../../types';
 import { Icon } from '@iconify/react';
 import AddIcon from '@iconify/icons-ic/outline-subdirectory-arrow-left';
-import { useDataStore } from '../../store/context';
+import { useStore } from '../../store/context';
 import styles from './AddLocation.module.scss';
 
 const AddLocation = observer(() => {
-  const store = useDataStore();
+  const store = useStore();
   const { fetchWeatherReportByCityName } = store;
 
   const [inputtedLocation, setInputtedLocation] = useState('');

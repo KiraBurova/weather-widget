@@ -5,7 +5,7 @@ import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautif
 
 import { Icon } from '@iconify/react';
 import CloseSettingsIcon from '@iconify/icons-ic/close';
-import { useDataStore } from '../../store/context';
+import { useStore } from '../../store/context';
 
 import LocationItem from '../LocationItem';
 import AddLocation from '../AddLocation';
@@ -14,7 +14,7 @@ import { SettingsProps } from './types';
 import styles from './Settings.module.scss';
 
 const Settings = observer(({ handleToggleSettings }: SettingsProps) => {
-  const store = useDataStore();
+  const store = useStore();
   const { locations, reorderLocations } = store;
 
   const onDragEnd = (result: DropResult) => {

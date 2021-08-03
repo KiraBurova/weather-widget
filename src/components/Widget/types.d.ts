@@ -1,7 +1,7 @@
 import React from 'react';
-import { WidgetDataType } from '../../types';
+import { TWidgetData } from '../../types';
 
 export interface WidgetProps {
-  weatherReport: WidgetDataType;
+  weatherReport: TWidgetData;
   handleToggleSettings: (e: React.MouseEvent) => void;
 }

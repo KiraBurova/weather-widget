@@ -1,22 +1,34 @@
 import { getWeatherReportByCityName, getWeatherReportByLocation } from '../api';
 import { transgormWeatherReportData } from '../utils';
 
-import { TLocation, WidgetDataType } from '../types';
+import { TLocation, TWidgetData } from '../types';
 
 export function createStore() {
   return {
-    location: '',
+    loading: false,
     locations: [] as TLocation[],
-    weatherReports: [] as WidgetDataType[],
+    weatherReports: [] as TWidgetData[],
+    setLoading(loading: boolean) {
+      this.loading = loading;
+    },
     fetchWeatherReportByLocation(latitude: number, longitude: number) {
+      this.setLoading(true);
       getWeatherReportByLocation(latitude, longitude)
         .then((response) => {
           const weatherReports = transgormWeatherReportData(response.data);
           this.setWeatherReports(weatherReports);
+          const location = {
+            name: weatherReports.name,
+            id: Math.random(),
+          };
+          this.addLocation(location);
+          this.setLocationsToLocalStorage();
         })
-        .catch((error: Error) => console.log(error));
+        .catch((error: Error) => console.log(error))
+        .then(() => this.setLoading(false));
     },
     fetchWeatherReportByCityName(location: TLocation) {
+      this.setLoading(true);
       getWeatherReportByCityName(location.name)
         .then((response) => {
           this.addLocation(location);
@@ -24,7 +36,16 @@ export function createStore() {
           const weatherReports = transgormWeatherReportData(response.data);
           this.setWeatherReports(weatherReports);
         })
-        .catch((error: Error) => console.log(error));
+        .catch((error: Error) => console.log(error))
+        .then(() => this.setLoading(false));
+    },
+    reorderWeatherReports() {
+      this.weatherReports = [...this.weatherReports].sort((a, b) => {
+        return this.locations.findIndex((p) => p.name.toLowerCase() === a.name.toLowerCase()) - this.locations.findIndex((p) => p.name.toLowerCase() === b.name.toLowerCase());
+      });
+    },
+    setWeatherReports(weatherReport: TWidgetData) {
+      this.weatherReports.push(weatherReport);
     },
     addLocation(location: TLocation) {
       this.locations.push(location);
@@ -35,19 +56,13 @@ export function createStore() {
     deleteLocation(id: number) {
       this.locations = this.locations.filter((location) => location.id !== id);
     },
-    //@ts-ignore
-    reorderLocations(list, startIndex, endIndex) {
+    reorderLocations(list: TLocation[], startIndex: number, endIndex: number) {
       const result = Array.from(list);
       const [removed] = result.splice(startIndex, 1);
       result.splice(endIndex, 0, removed);
-
-      console.log(list, startIndex);
-
-      //@ts-ignore
       this.setLocations(result);
-    },
-    setWeatherReports(weatherReport: WidgetDataType) {
-      this.weatherReports.push(weatherReport);
+      this.setLocationsToLocalStorage();
+      this.reorderWeatherReports();
     },
     setLocationsToLocalStorage() {
       const serializedLocations = JSON.stringify(this.locations);

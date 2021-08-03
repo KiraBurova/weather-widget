@@ -2,17 +2,17 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
 import SettingsIcon from '@iconify/icons-ic/outline-settings';
-import { useDataStore } from './store/context';
+import { useStore } from './store/context';
 
 import MainWidget from './components/Widget';
 import Settings from './components/Settings';
 
 import styles from './App.module.scss';
-import { TLocation } from './types';
+import { TLocation, TWidgetData } from './types';
 
 const App = observer(() => {
-  const store = useDataStore();
-  const { weatherReports, getLocationFromLocalStorage, fetchWeatherReportByLocation, fetchWeatherReportByCityName } = store;
+  const store = useStore();
+  const { loading, weatherReports, getLocationFromLocalStorage, fetchWeatherReportByLocation, fetchWeatherReportByCityName } = store;
   const [error, setError] = useState('');
   const [settingsOpened, setSettingsOpened] = useState(false);
 
@@ -45,6 +45,8 @@ const App = observer(() => {
       }
     };
 
+    console.log('init');
+
     handleCheckIfGeoLocationIsAvailable();
   }, [fetchWeatherReportByLocation, fetchWeatherReportByCityName, getLocationFromLocalStorage]);
 
@@ -57,14 +59,15 @@ const App = observer(() => {
           <div>
             <div>
               {!!weatherReports.length &&
-                weatherReports.map((weatherReport: any) => <MainWidget key={weatherReport.cityName} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />)}
+                weatherReports.map((weatherReport: TWidgetData) => <MainWidget key={weatherReport.name} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />)}
             </div>
             <div onClick={handleToggleSettings}>
               <Icon icon={SettingsIcon} className={styles.settingsIcon} />
             </div>
           </div>
         )}
-        <span className={styles.error}>{error}</span>
+        {error && <span className={styles.error}>{error}</span>}
+        {loading && <span>Loading...</span>}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { WeatherReportType, WidgetDataType } from '../types';
+import { TInitialWeatherReport, TWidgetData } from '../types';
 
 import { getWeatherIconByIconName } from '../api';
 
@@ -10,9 +10,9 @@ export const roundDegrees = (degrees: number) => {
   return Math.round(degrees);
 };
 
-export const transgormWeatherReportData = (weatherReport: WeatherReportType): WidgetDataType => {
+export const transgormWeatherReportData = (weatherReport: TInitialWeatherReport): TWidgetData => {
   return {
-    cityName: weatherReport.name,
+    name: weatherReport.name,
     countryName: weatherReport.sys.country,
     weatherDescription: weatherReport.weather[0].description,
     feelsLike: weatherReport.main.feels_like,

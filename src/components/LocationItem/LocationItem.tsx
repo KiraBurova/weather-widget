@@ -2,7 +2,7 @@ import React from 'react';
 
 import { observer } from 'mobx-react-lite';
 
-import { useDataStore } from '../../store/context';
+import { useStore } from '../../store/context';
 
 import { Icon } from '@iconify/react';
 import DragIcon from '@iconify/icons-ic/outline-drag-handle';
@@ -12,7 +12,7 @@ import styles from './LocationItem.module.scss';
 import { LocationItemProps } from './types';
 
 const LocationItem = observer(({ location, dragHandleProps }: LocationItemProps) => {
-  const store = useDataStore();
+  const store = useStore();
   const { deleteLocation } = store;
 
   const handleDeleteLocation = (id: number) => () => {
