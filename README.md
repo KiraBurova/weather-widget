@@ -1,8 +1,10 @@
-todo
+#### [Live version](https://kiraburova.github.io/weather-widget/)
 
-- [x] add dnd
-- [x] check for any|object types
-- [x] add animations / hovers etc
-- [ ] check for problems
-- [x] add empty placeholders to settings
-- [x] add loadings
+To run on local:
+
+- npm install
+- npm start
+
+Tests:
+
+- npm run tests
