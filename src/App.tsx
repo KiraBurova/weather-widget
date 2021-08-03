@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
 import SettingsIcon from '@iconify/icons-ic/outline-settings';
+
 import { useStore } from './store/context';
 
 import MainWidget from './components/Widget';
@@ -22,19 +23,22 @@ const App = observer(() => {
 
   useEffect(() => {
     const handleGetCurrentLocation = () => {
-      navigator.geolocation.getCurrentPosition((position) => {
-        const { latitude, longitude } = position.coords;
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
 
-        const parsedLocations = getLocationFromLocalStorage();
+          const parsedLocations = getLocationFromLocalStorage();
 
-        if (Object.values(parsedLocations).length) {
-          Object.values(parsedLocations as TLocation[]).forEach((location) => {
-            fetchWeatherReportByCityName(location);
-          });
-        } else {
-          fetchWeatherReportByLocation(latitude, longitude);
-        }
-      });
+          if (Object.values(parsedLocations).length) {
+            Object.values(parsedLocations as TLocation[]).forEach((location) => {
+              fetchWeatherReportByCityName(location);
+            });
+          } else {
+            fetchWeatherReportByLocation(latitude, longitude);
+          }
+        },
+        (error) => setError(error.message),
+      );
     };
 
     const handleCheckIfGeoLocationIsAvailable = () => {
@@ -45,8 +49,6 @@ const App = observer(() => {
       }
     };
 
-    console.log('init');
-
     handleCheckIfGeoLocationIsAvailable();
   }, [fetchWeatherReportByLocation, fetchWeatherReportByCityName, getLocationFromLocalStorage]);
 
@@ -56,15 +58,20 @@ const App = observer(() => {
         {settingsOpened ? (
           <Settings handleToggleSettings={handleToggleSettings} />
         ) : (
-          <div>
-            <div>
-              {!!weatherReports.length &&
-                weatherReports.map((weatherReport: TWidgetData) => <MainWidget key={weatherReport.name} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />)}
-            </div>
-            <div onClick={handleToggleSettings}>
-              <Icon icon={SettingsIcon} className={styles.settingsIcon} />
-            </div>
-          </div>
+          <>
+            {!!weatherReports.length && (
+              <div>
+                <div>
+                  {weatherReports.map((weatherReport: TWidgetData) => (
+                    <MainWidget key={weatherReport.name} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />
+                  ))}
+                </div>
+                <div onClick={handleToggleSettings}>
+                  <Icon icon={SettingsIcon} className={styles.settingsIcon} />
+                </div>
+              </div>
+            )}
+          </>
         )}
         {error && <span className={styles.error}>{error}</span>}
         {loading && <span>Loading...</span>}
