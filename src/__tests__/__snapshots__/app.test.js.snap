@@ -75,7 +75,7 @@ exports[`<App /> show settings 1`] = `
       >
         <div
           data-rbd-draggable-context-id="0"
-          data-rbd-draggable-id="0.6721134489210905"
+          data-rbd-draggable-id="0.4713882117403312"
           style="margin-bottom: 5px;"
         >
           <div
@@ -84,7 +84,7 @@ exports[`<App /> show settings 1`] = `
             <div
               aria-describedby="rbd-hidden-text-0-hidden-text-0"
               data-rbd-drag-handle-context-id="0"
-              data-rbd-drag-handle-draggable-id="0.6721134489210905"
+              data-rbd-drag-handle-draggable-id="0.4713882117403312"
               draggable="false"
               role="button"
               tabindex="0"
