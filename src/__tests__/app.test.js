@@ -6,13 +6,17 @@ import { StoreProvider } from '../store/context';
 
 import App from '../App';
 
+const setup = () => {
+  return render(
+    <StoreProvider>
+      <App></App>
+    </StoreProvider>,
+  );
+};
+
 describe('<App />', () => {
   it('show error when no geolocation is available', () => {
-    const { container, getByTestId } = render(
-      <StoreProvider>
-        <App></App>
-      </StoreProvider>,
-    );
+    const { container, getByTestId } = setup();
     const error = getByTestId('error');
 
     expect(error).toBeTruthy();
@@ -35,11 +39,7 @@ describe('<App />', () => {
     };
     global.navigator.geolocation = mockGeolocation;
 
-    const { container, getByRole, getByText } = render(
-      <StoreProvider>
-        <App></App>
-      </StoreProvider>,
-    );
+    const { container, getByRole, getByText } = setup();
 
     await waitFor(() => {
       const button = getByRole('button');
@@ -66,11 +66,7 @@ describe('<App />', () => {
 
     global.navigator.geolocation = mockGeolocation;
 
-    const { container, getByTestId } = render(
-      <StoreProvider>
-        <App></App>
-      </StoreProvider>,
-    );
+    const { container, getByTestId } = setup();
 
     await waitFor(() => {
       expect(getByTestId('error')).toBeTruthy();

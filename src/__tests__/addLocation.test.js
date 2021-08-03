@@ -6,13 +6,17 @@ import { StoreProvider } from '../store/context';
 
 import AddLocation from '../components/AddLocation';
 
+const setup = () => {
+  return render(
+    <StoreProvider>
+      <AddLocation></AddLocation>
+    </StoreProvider>,
+  );
+};
+
 describe('<AddLocation />', () => {
   it('change location on input', () => {
-    const { container, getByRole } = render(
-      <StoreProvider>
-        <AddLocation></AddLocation>
-      </StoreProvider>,
-    );
+    const { container, getByRole } = setup();
     const textBox = getByRole('textbox');
 
     fireEvent.change(textBox, { target: { value: 'Oslo' } });
@@ -22,11 +26,7 @@ describe('<AddLocation />', () => {
   });
 
   it('submit inputted location', () => {
-    const { container, getByTestId, getByRole } = render(
-      <StoreProvider>
-        <AddLocation></AddLocation>
-      </StoreProvider>,
-    );
+    const { container, getByTestId, getByRole } = setup();
     const textBox = getByRole('textbox');
 
     fireEvent.change(textBox, { target: { value: 'Oslo' } });
