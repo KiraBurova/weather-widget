@@ -1,6 +1,7 @@
 @import 'styles/variables';
 
 .container {
+  position: relative;
   min-width: 300px;
   border: 1px solid $main-dark;
   border-radius: $border-radius;
@@ -13,6 +14,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.settingsIcon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: lighten($main-dark, 20%);
+  }
 }
 
 .error {

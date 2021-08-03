@@ -2,23 +2,19 @@ import React from 'react';
 
 import { transformMetersToKM, roundDegrees } from '../../utils';
 import { Icon } from '@iconify/react';
-import SettingsIcon from '@iconify/icons-ic/outline-settings';
 import PressureIcon from '@iconify/icons-ic/filter-tilt-shift';
 import WindIcon from '@iconify/icons-ic/outline-near-me';
 
 import { WidgetProps } from './types';
 import styles from './Widget.module.scss';
 
-const Widget = ({ weatherReport, handleToggleSettings }: WidgetProps) => {
+const Widget = ({ weatherReport }: WidgetProps) => {
   return (
     <div className={styles.widget}>
       <div className={styles.widgetTop}>
         <span className={styles.place}>
           {weatherReport.cityName}, {weatherReport.countryName}
         </span>
-        <div onClick={handleToggleSettings}>
-          <Icon icon={SettingsIcon} className={styles.settingsIcon} />
-        </div>
       </div>
       <div className={styles.temperature}>
         <img src={weatherReport.weatherIcon} alt='Weather icon' />

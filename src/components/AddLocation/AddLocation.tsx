@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import { TLocation } from '../../types';
-
+import { Icon } from '@iconify/react';
+import AddIcon from '@iconify/icons-ic/outline-subdirectory-arrow-left';
 import { useDataStore } from '../../store/context';
 import styles from './AddLocation.module.scss';
 
@@ -28,12 +29,15 @@ const AddLocation = observer(() => {
   };
 
   return (
-    <form className={styles.addContainer} onSubmit={handleSubmitLocation}>
-      <input autoFocus className={styles.locationInput} value={inputtedLocation} onChange={handleChangeLocation} />
-      <button type='submit' className={styles.addButton} disabled={!inputtedLocation}>
-        Add
-      </button>
-    </form>
+    <div>
+      <span className={styles.formLabel}>Add location:</span>
+      <form className={styles.form} onSubmit={handleSubmitLocation}>
+        <input autoFocus className={styles.locationInput} value={inputtedLocation} onChange={handleChangeLocation} />
+        <button type='submit' className={styles.addButton} disabled={!inputtedLocation}>
+          <Icon icon={AddIcon} />
+        </button>
+      </form>
+    </div>
   );
 });
 

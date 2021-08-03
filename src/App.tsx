@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
-
+import { Icon } from '@iconify/react';
+import SettingsIcon from '@iconify/icons-ic/outline-settings';
 import { useDataStore } from './store/context';
 
 import MainWidget from './components/Widget';
@@ -44,8 +45,6 @@ const App = observer(() => {
       }
     };
 
-    console.log('called');
-
     handleCheckIfGeoLocationIsAvailable();
   }, [fetchWeatherReportByLocation, fetchWeatherReportByCityName, getLocationFromLocalStorage]);
 
@@ -55,7 +54,15 @@ const App = observer(() => {
         {settingsOpened ? (
           <Settings handleToggleSettings={handleToggleSettings} />
         ) : (
-          !!weatherReports.length && weatherReports.map((weatherReport: any) => <MainWidget key={weatherReport.cityName} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />)
+          <div>
+            <div>
+              {!!weatherReports.length &&
+                weatherReports.map((weatherReport: any) => <MainWidget key={weatherReport.cityName} weatherReport={weatherReport} handleToggleSettings={handleToggleSettings} />)}
+            </div>
+            <div onClick={handleToggleSettings}>
+              <Icon icon={SettingsIcon} className={styles.settingsIcon} />
+            </div>
+          </div>
         )}
         <span className={styles.error}>{error}</span>
       </div>

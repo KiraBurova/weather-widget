@@ -21,8 +21,9 @@
   cursor: pointer;
   margin-left: auto;
   transition: color 0.2s ease-in-out;
+  color: $accent;
 
   &:hover {
-    color: lighten($main-dark, 20%);
+    color: lighten($accent, 10%);
   }
 }
