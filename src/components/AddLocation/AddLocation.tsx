@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
-
-import { TLocation } from '../../types';
 import { Icon } from '@iconify/react';
 import AddIcon from '@iconify/icons-ic/outline-subdirectory-arrow-left';
+
 import { useStore } from '../../store/context';
+
+import { TLocation } from '../../types';
 import styles from './AddLocation.module.scss';
 
 const AddLocation = observer(() => {

@@ -1,10 +1,9 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-
 import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
-
 import { Icon } from '@iconify/react';
 import CloseSettingsIcon from '@iconify/icons-ic/close';
+
 import { useStore } from '../../store/context';
 
 import LocationItem from '../LocationItem';

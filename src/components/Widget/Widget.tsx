@@ -1,9 +1,9 @@
 import React from 'react';
-
-import { transformMetersToKM, roundDegrees } from '../../utils';
 import { Icon } from '@iconify/react';
 import PressureIcon from '@iconify/icons-ic/filter-tilt-shift';
 import WindIcon from '@iconify/icons-ic/outline-near-me';
+
+import { transformMetersToKM, roundDegrees } from '../../utils';
 
 import { WidgetProps } from './types';
 import styles from './Widget.module.scss';

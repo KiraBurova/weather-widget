@@ -8,8 +8,8 @@ import { useStore } from './store/context';
 import MainWidget from './components/Widget';
 import Settings from './components/Settings';
 
-import styles from './App.module.scss';
 import { TLocation, TWidgetData } from './types';
+import styles from './App.module.scss';
 
 const App = observer(() => {
   const store = useStore();

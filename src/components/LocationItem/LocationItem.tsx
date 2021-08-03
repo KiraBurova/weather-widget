@@ -1,15 +1,13 @@
 import React from 'react';
-
 import { observer } from 'mobx-react-lite';
-
-import { useStore } from '../../store/context';
-
 import { Icon } from '@iconify/react';
 import DragIcon from '@iconify/icons-ic/outline-drag-handle';
 import DeleteIcon from '@iconify/icons-ic/outline-delete-outline';
 
-import styles from './LocationItem.module.scss';
+import { useStore } from '../../store/context';
+
 import { LocationItemProps } from './types';
+import styles from './LocationItem.module.scss';
 
 const LocationItem = observer(({ location, dragHandleProps }: LocationItemProps) => {
   const store = useStore();
