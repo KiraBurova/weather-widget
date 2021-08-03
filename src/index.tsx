@@ -11,5 +11,5 @@ ReactDOM.render(
       <App />
     </StoreProvider>
   </React.StrictMode>,
-  document.getElementById('weather-widget'),
+  document.getElementById('root'),
 );
