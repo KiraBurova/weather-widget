@@ -29,7 +29,7 @@ const AddLocation = observer(() => {
 
   return (
     <form className={styles.addContainer} onSubmit={handleSubmitLocation}>
-      <input className={styles.locationInput} value={inputtedLocation} onChange={handleChangeLocation} />
+      <input autoFocus className={styles.locationInput} value={inputtedLocation} onChange={handleChangeLocation} />
       <button type='submit' className={styles.addButton} disabled={!inputtedLocation}>
         Add
       </button>

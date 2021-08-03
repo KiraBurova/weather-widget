@@ -30,7 +30,7 @@ const Settings = observer(({ handleToggleSettings }: SettingsProps) => {
       <div className={styles.settingsTop}>
         <span>Settings</span>
         <div onClick={handleToggleSettings}>
-          <Icon icon={CloseSettingsIcon} className={styles.settingsIcon} />
+          <Icon icon={CloseSettingsIcon} className={styles.closeIcon} />
         </div>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>

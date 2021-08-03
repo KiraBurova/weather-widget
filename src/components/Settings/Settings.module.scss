@@ -1,3 +1,5 @@
+@import '../../styles/variables';
+
 .settings {
   display: flex;
   flex-direction: column;
@@ -13,9 +15,14 @@
   margin-bottom: 15px;
 }
 
-.settingsIcon {
+.closeIcon {
   font-size: 24px;
   cursor: pointer;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: lighten($main-dark, 20%);
+  }
 }
 
 .addedLocations {

@@ -3,7 +3,7 @@
 .item {
   display: flex;
   align-items: center;
-  background-color: $main-dark;
+  background-color: $additional;
   border-radius: $border-radius;
   font-size: 1rem;
   padding: 0.5em;
@@ -12,7 +12,6 @@
 
 .dragIcon {
   font-size: 24px;
-  cursor: pointer;
   margin-right: 10px;
 }
 
@@ -21,4 +20,9 @@
   font-size: 24px;
   cursor: pointer;
   margin-left: auto;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: lighten($main-dark, 20%);
+  }
 }
