@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 import SettingsIcon from '@iconify/icons-ic/outline-settings';
 
 import { useStore } from './store/context';
+import { getWeatherReportByCityName } from './api';
 
 import MainWidget from './components/Widget';
 import Settings from './components/Settings';
@@ -13,7 +14,7 @@ import styles from './App.module.scss';
 
 const App = observer(() => {
   const store = useStore();
-  const { loading, weatherReports, getLocationFromLocalStorage, fetchWeatherReportByLocation, fetchWeatherReportByCityName } = store;
+  const { loading, serverError, weatherReports, getLocationFromLocalStorage, fetchWeatherReportByLocation, fetchAllWeatherReportsByCityName } = store;
   const [error, setError] = useState('');
   const [settingsOpened, setSettingsOpened] = useState(false);
 
@@ -27,11 +28,13 @@ const App = observer(() => {
         (position) => {
           const { latitude, longitude } = position.coords;
           const parsedLocations = getLocationFromLocalStorage();
+          const promises: any = [];
 
           if (Object.values(parsedLocations).length) {
             Object.values(parsedLocations as TLocation[]).forEach((location) => {
-              fetchWeatherReportByCityName(location);
+              promises.push(getWeatherReportByCityName(location.name));
             });
+            fetchAllWeatherReportsByCityName(promises);
           } else {
             fetchWeatherReportByLocation(latitude, longitude);
           }
@@ -49,7 +52,7 @@ const App = observer(() => {
     };
 
     handleCheckIfGeoLocationIsAvailable();
-  }, [fetchWeatherReportByLocation, fetchWeatherReportByCityName, getLocationFromLocalStorage]);
+  }, [fetchWeatherReportByLocation, fetchAllWeatherReportsByCityName, getLocationFromLocalStorage]);
 
   return (
     <div className={styles.app}>
@@ -72,9 +75,9 @@ const App = observer(() => {
             )}
           </>
         )}
-        {error && (
+        {(error || serverError) && (
           <span className={styles.error} data-testid='error'>
-            {error}
+            {error || serverError}
           </span>
         )}
         {loading && <span>Loading...</span>}

@@ -13,7 +13,7 @@ const LocationItem = observer(({ location, dragHandleProps }: LocationItemProps)
   const store = useStore();
   const { deleteLocation } = store;
 
-  const handleDeleteLocation = (id: number) => () => {
+  const handleDeleteLocation = (id: string) => () => {
     deleteLocation(id);
   };
 

@@ -56,5 +56,5 @@ export interface TWidgetData extends TInitialWeatherReportPicked {
 
 export type TLocation = {
   name: string;
-  id: number;
+  id: string;
 };

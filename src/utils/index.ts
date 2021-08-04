@@ -8,7 +8,7 @@ export const roundDegrees = (degrees: number) => {
   return Math.round(degrees);
 };
 
-export const transgormWeatherReportData = (weatherReport: TInitialWeatherReport): TWidgetData => {
+export const transformWeatherReportData = (weatherReport: TInitialWeatherReport): TWidgetData => {
   return {
     name: weatherReport.name,
     countryName: weatherReport.sys.country,

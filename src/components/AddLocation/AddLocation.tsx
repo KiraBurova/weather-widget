@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Icon } from '@iconify/react';
 import AddIcon from '@iconify/icons-ic/outline-subdirectory-arrow-left';
+import { v4 as uuidv4 } from 'uuid';
 
 import { useStore } from '../../store/context';
 
@@ -23,7 +24,7 @@ const AddLocation = observer(() => {
     e.preventDefault();
     const location: TLocation = {
       name: inputtedLocation,
-      id: Math.random(),
+      id: uuidv4(),
     };
     fetchWeatherReportByCityName(location);
     setInputtedLocation('');

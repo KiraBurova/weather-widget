@@ -1,42 +1,69 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import { getWeatherReportByCityName, getWeatherReportByLocation } from '../api';
-import { transgormWeatherReportData } from '../utils';
+import { transformWeatherReportData } from '../utils';
 
 import { TLocation, TWidgetData } from '../types';
 
 export function createStore() {
   return {
     loading: false,
+    serverError: '',
     locations: [] as TLocation[],
     weatherReports: [] as TWidgetData[],
     setLoading(loading: boolean) {
       this.loading = loading;
     },
+    setServerError(error: string) {
+      this.serverError = error;
+    },
     fetchWeatherReportByLocation(latitude: number, longitude: number) {
       this.setLoading(true);
       getWeatherReportByLocation(latitude, longitude)
         .then((response) => {
-          const weatherReports = transgormWeatherReportData(response.data);
+          const weatherReports = transformWeatherReportData(response.data);
           this.setWeatherReports(weatherReports);
           const location = {
             name: weatherReports.name,
-            id: Math.random(),
+            id: uuidv4(),
           };
           this.addLocation(location);
           this.setLocationsToLocalStorage();
         })
-        .catch((error: Error) => console.log(error))
+        .catch((error: Error) => this.setServerError(error.message))
         .then(() => this.setLoading(false));
     },
     fetchWeatherReportByCityName(location: TLocation) {
       this.setLoading(true);
+
       getWeatherReportByCityName(location.name)
         .then((response) => {
           this.addLocation(location);
           this.setLocationsToLocalStorage();
-          const weatherReports = transgormWeatherReportData(response.data);
+          const weatherReports = transformWeatherReportData(response.data);
           this.setWeatherReports(weatherReports);
+          console.log(weatherReports);
         })
-        .catch((error: Error) => console.log(error))
+        .catch((error: Error) => this.setServerError(error.message))
+        .then(() => this.setLoading(false));
+    },
+    fetchAllWeatherReportsByCityName(promises: any) {
+      this.setLoading(true);
+
+      Promise.all(promises)
+        .then((response) => {
+          response.forEach((res: any) => {
+            const location: any = {
+              name: res.data.name,
+              id: uuidv4(),
+            };
+            this.addLocation(location);
+            this.setLocationsToLocalStorage();
+            const weatherReports = transformWeatherReportData(res.data);
+            this.setWeatherReports(weatherReports);
+          });
+        })
+        .catch((error: Error) => this.setServerError(error.message))
         .then(() => this.setLoading(false));
     },
     reorderWeatherReports() {
@@ -53,7 +80,7 @@ export function createStore() {
     setLocations(locations: TLocation[]) {
       this.locations = locations;
     },
-    deleteLocation(id: number) {
+    deleteLocation(id: string) {
       this.locations = this.locations.filter((location) => location.id !== id);
     },
     reorderLocations(list: TLocation[], startIndex: number, endIndex: number) {
