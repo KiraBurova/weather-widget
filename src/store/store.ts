@@ -80,8 +80,10 @@ export function createStore() {
     setLocations(locations: TLocation[]) {
       this.locations = locations;
     },
-    deleteLocation(id: string) {
-      this.locations = this.locations.filter((location) => location.id !== id);
+    deleteLocation(name: string) {
+      this.locations = this.locations.filter((location) => location.name !== name);
+      this.weatherReports = this.weatherReports.filter((weatherReport) => weatherReport.name !== name);
+      this.setLocationsToLocalStorage();
     },
     reorderLocations(list: TLocation[], startIndex: number, endIndex: number) {
       const result = Array.from(list);

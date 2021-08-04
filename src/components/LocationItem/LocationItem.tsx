@@ -13,8 +13,8 @@ const LocationItem = observer(({ location, dragHandleProps }: LocationItemProps)
   const store = useStore();
   const { deleteLocation } = store;
 
-  const handleDeleteLocation = (id: string) => () => {
-    deleteLocation(id);
+  const handleDeleteLocation = (name: string) => () => {
+    deleteLocation(name);
   };
 
   return (
@@ -23,7 +23,7 @@ const LocationItem = observer(({ location, dragHandleProps }: LocationItemProps)
         <Icon icon={DragIcon} className={styles.dragIcon} />
       </div>
       {location.name}
-      <span className={styles.deleteIcon} onClick={handleDeleteLocation(location.id)} role='button'>
+      <span className={styles.deleteIcon} onClick={handleDeleteLocation(location.name)} role='button'>
         <Icon icon={DeleteIcon} />
       </span>
     </div>
