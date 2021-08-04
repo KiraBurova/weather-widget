@@ -37,7 +37,7 @@ const Settings = observer(({ handleToggleSettings }: SettingsProps) => {
           {(provided) => (
             <div className={styles.addedLocations} {...provided.droppableProps} ref={provided.innerRef}>
               {locations.map((location, index) => (
-                <Draggable key={location.id} draggableId={'' + location.id} index={index}>
+                <Draggable key={location.id} draggableId={location.name} index={index}>
                   {(provided) => (
                     <div ref={provided.innerRef} {...provided.draggableProps} style={{ ...provided.draggableProps.style, marginBottom: '5px' }}>
                       <LocationItem dragHandleProps={provided.dragHandleProps} location={location}></LocationItem>
