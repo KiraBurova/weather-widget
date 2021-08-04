@@ -5,7 +5,7 @@
 
 Tests:
 
-- npm run tests
+- npm run test
 
 Build:
 
